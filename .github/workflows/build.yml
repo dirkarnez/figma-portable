@@ -1,0 +1,39 @@
+name: portable-release-actions-workflow
+on:
+  push:
+    # Sequence of patterns matched against refs/tags
+    tags:
+      - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
+      - 'c*' # Push events to matching v*, i.e. v1.0, v20.15.10
+      
+jobs:
+  build:
+    name: Create Release
+    runs-on: windows-latest
+    env:
+      targetZip: figma-portable-${{ github.ref_name }}.zip
+    steps:
+      - name: installer
+        shell: bash
+        run: |
+          curl -L --output installer.exe 'https://www.figma.com/download/desktop/win'
+          
+      - name: uncompress 
+        shell: cmd
+        run: |
+          7z.exe x installer.exe &&^
+          7z.exe x Figma-116.5.18-full.nupkg
+          
+      - name: Archive Release
+        uses: thedoctor0/zip-release@master
+        with:
+          type: 'zip'
+          directory: "lib/net45"
+          filename: "${{ env.targetZip }}"
+          
+      - name: Release prebuilt
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: "lib/net45/${{ env.targetZip }}"
+          allowUpdates: true
+          token: ${{ secrets.GITHUB_TOKEN }}
