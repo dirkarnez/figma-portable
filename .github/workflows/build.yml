@@ -27,7 +27,7 @@ jobs:
           7z.exe x Figma-116.6.3-full.nupkg
       
       - shell: cmd
-        run: start.cmd lib\net45
+        run: xcopy /H /Y /C "start.cmd" "lib\net45"
           
       - name: Archive Release
         uses: thedoctor0/zip-release@master
