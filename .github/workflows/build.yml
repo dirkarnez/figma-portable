@@ -24,7 +24,7 @@ jobs:
         shell: cmd
         run: |
           7z.exe x installer.exe &&^
-          7z.exe x Figma-116.5.18-full.nupkg
+          7z.exe x Figma-116.6.3-full.nupkg
       
       - shell: cmd
         run: start.cmd lib\net45
