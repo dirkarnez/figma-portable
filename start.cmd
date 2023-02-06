@@ -6,8 +6,8 @@ set LOCALAPPDATA=%~dp0\LOCALAPPDATA
 if not exist %LOCALAPPDATA% (
 	mkdir %LOCALAPPDATA%
 )
-if not exist %LOCALAPPDATA% (
-	mkdir %LOCALAPPDATA%\AppData\Roaming\Figma
+if not exist %USERPROFILE% (
+	mkdir %USERPROFILE%\AppData\Roaming\Figma
 )
 
 start Figma.exe
