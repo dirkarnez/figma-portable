@@ -24,7 +24,7 @@ jobs:
         shell: cmd
         run: |
           7z.exe x installer.exe &&^
-          7z.exe x Figma-116.6.3-full.nupkg
+          7z.exe x Figma-116.15.15-full.nupkg
       
       - shell: cmd
         run: xcopy /H /Y /C "start.cmd" "lib\net45"
